@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD43EA322078ADC000D28AE2 /* BasicNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43EA312078ADC000D28AE2 /* BasicNavigationViewController.swift */; };
 		CDFF3104207861AE0094D5B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF3103207861AE0094D5B3 /* AppDelegate.swift */; };
 		CDFF3106207861AE0094D5B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF3105207861AE0094D5B3 /* ViewController.swift */; };
 		CDFF3109207861AE0094D5B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDFF3107207861AE0094D5B3 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 		CDFF3111207861B00094D5B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDFF310F207861B00094D5B3 /* LaunchScreen.storyboard */; };
 		CDFF311C207861B00094D5B3 /* ldcontrollerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF311B207861B00094D5B3 /* ldcontrollerTests.swift */; };
 		CDFF3127207861B00094D5B3 /* ldcontrollerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF3126207861B00094D5B3 /* ldcontrollerUITests.swift */; };
+		EEC29FA4609F5409D5951EF4 /* Pods_ldcontroller.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBD674C2CEBEFCD572981252 /* Pods_ldcontroller.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A8BD481EFD85D709B33183C /* Pods-ldcontroller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ldcontroller.release.xcconfig"; path = "Pods/Target Support Files/Pods-ldcontroller/Pods-ldcontroller.release.xcconfig"; sourceTree = "<group>"; };
+		CD43EA312078ADC000D28AE2 /* BasicNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicNavigationViewController.swift; sourceTree = "<group>"; };
+		CD43EA342078C75700D28AE2 /* ldcontroller-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ldcontroller-Bridging-Header.h"; sourceTree = "<group>"; };
 		CDFF3100207861AE0094D5B3 /* ldcontroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ldcontroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDFF3103207861AE0094D5B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDFF3105207861AE0094D5B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +54,8 @@
 		CDFF3122207861B00094D5B3 /* ldcontrollerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ldcontrollerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDFF3126207861B00094D5B3 /* ldcontrollerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ldcontrollerUITests.swift; sourceTree = "<group>"; };
 		CDFF3128207861B00094D5B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D80C0FD762CB30C2E39584F1 /* Pods-ldcontroller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ldcontroller.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ldcontroller/Pods-ldcontroller.debug.xcconfig"; sourceTree = "<group>"; };
+		FBD674C2CEBEFCD572981252 /* Pods_ldcontroller.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ldcontroller.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEC29FA4609F5409D5951EF4 /* Pods_ldcontroller.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +84,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07A04295BD6DB5AE72E6EDC5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D80C0FD762CB30C2E39584F1 /* Pods-ldcontroller.debug.xcconfig */,
+				4A8BD481EFD85D709B33183C /* Pods-ldcontroller.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CDFF30F7207861AE0094D5B3 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +100,8 @@
 				CDFF311A207861B00094D5B3 /* ldcontrollerTests */,
 				CDFF3125207861B00094D5B3 /* ldcontrollerUITests */,
 				CDFF3101207861AE0094D5B3 /* Products */,
+				07A04295BD6DB5AE72E6EDC5 /* Pods */,
+				E39AA36671FC99BD9C7DB28E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +125,8 @@
 				CDFF310F207861B00094D5B3 /* LaunchScreen.storyboard */,
 				CDFF3112207861B00094D5B3 /* Info.plist */,
 				CDFF310A207861AE0094D5B3 /* ldcontroller.xcdatamodeld */,
+				CD43EA312078ADC000D28AE2 /* BasicNavigationViewController.swift */,
+				CD43EA342078C75700D28AE2 /* ldcontroller-Bridging-Header.h */,
 			);
 			path = ldcontroller;
 			sourceTree = "<group>";
@@ -128,6 +149,14 @@
 			path = ldcontrollerUITests;
 			sourceTree = "<group>";
 		};
+		E39AA36671FC99BD9C7DB28E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FBD674C2CEBEFCD572981252 /* Pods_ldcontroller.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +164,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDFF312B207861B00094D5B3 /* Build configuration list for PBXNativeTarget "ldcontroller" */;
 			buildPhases = (
+				B751265F45AA14D2CA614E0B /* [CP] Check Pods Manifest.lock */,
 				CDFF30FC207861AE0094D5B3 /* Sources */,
 				CDFF30FD207861AE0094D5B3 /* Frameworks */,
 				CDFF30FE207861AE0094D5B3 /* Resources */,
+				23486427629F9077C638B561 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,6 +227,7 @@
 				TargetAttributes = {
 					CDFF30FF207861AE0094D5B3 = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
 					};
 					CDFF3116207861B00094D5B3 = {
 						CreatedOnToolsVersion = 9.3;
@@ -254,6 +286,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		23486427629F9077C638B561 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ldcontroller/Pods-ldcontroller-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Gecco/Gecco.framework",
+				"${BUILT_PRODUCTS_DIR}/Instructions/Instructions.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gecco.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instructions.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ldcontroller/Pods-ldcontroller-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B751265F45AA14D2CA614E0B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ldcontroller-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CDFF30FC207861AE0094D5B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -262,6 +343,7 @@
 				CDFF3106207861AE0094D5B3 /* ViewController.swift in Sources */,
 				CDFF3104207861AE0094D5B3 /* AppDelegate.swift in Sources */,
 				CDFF310C207861AE0094D5B3 /* ldcontroller.xcdatamodeld in Sources */,
+				CD43EA322078ADC000D28AE2 /* BasicNavigationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,17 +514,19 @@
 		};
 		CDFF312C207861B00094D5B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D80C0FD762CB30C2E39584F1 /* Pods-ldcontroller.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7K4VHH856;
 				INFOPLIST_FILE = ldcontroller/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontroller;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ldcontroller/ldcontroller-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -450,17 +534,18 @@
 		};
 		CDFF312D207861B00094D5B3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A8BD481EFD85D709B33183C /* Pods-ldcontroller.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7K4VHH856;
 				INFOPLIST_FILE = ldcontroller/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontroller;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ldcontroller/ldcontroller-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -474,11 +559,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7K4VHH856;
 				INFOPLIST_FILE = ldcontrollerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontrollerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -495,11 +576,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7K4VHH856;
 				INFOPLIST_FILE = ldcontrollerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontrollerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -515,11 +592,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7K4VHH856;
 				INFOPLIST_FILE = ldcontrollerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontrollerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -535,11 +608,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7K4VHH856;
 				INFOPLIST_FILE = ldcontrollerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontrollerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
