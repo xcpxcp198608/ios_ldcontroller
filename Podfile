@@ -6,6 +6,5 @@ target 'ldcontroller' do
     pod 'SwiftyJSON', '~> 3.1.4'
     pod 'Kingfisher', '~> 4.5.0'
     pod 'SnapKit', '~> 4.0.0'
-    pod 'Gecco'
     pod 'Instructions'
 end

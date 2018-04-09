@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Instructions
+import AudioToolbox
 
 class ViewController: UIViewController {
     
@@ -42,6 +43,12 @@ class ViewController: UIViewController {
         tfHolder.delegate = self
         coachMarksController.dataSource = self
         coachMarksController.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(capsChange), name: NSNotification.Name.UITextInputCurrentInputModeDidChange, object: nil)
+    }
+    
+    @objc func capsChange(){
+        print("caps")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,6 +60,10 @@ class ViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         self.coachMarksController.stop(immediately: true)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @IBAction func setIP(){
@@ -87,6 +98,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clickButton(button: UIButton){
+        AudioServicesPlaySystemSound(1105)
         switch button {
         case btPower:
             sendCommand(26)
@@ -168,7 +180,7 @@ extension ViewController: CoachMarksControllerDataSource, CoachMarksControllerDe
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
         coachViews.bodyView.hintLabel.text = "Click to set IP address"
-        coachViews.bodyView.nextLabel.text = "Ok"
+        coachViews.bodyView.nextLabel.text = "Got it"
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
     
@@ -183,9 +195,158 @@ extension ViewController: CoachMarksControllerDataSource, CoachMarksControllerDe
 extension ViewController: UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print(string)
+        
+        switch string {
+        case "0":
+            sendCommand(7)
+        case "1":
+            sendCommand(8)
+        case "2":
+            sendCommand(9)
+        case "3":
+            sendCommand(10)
+        case "4":
+            sendCommand(11)
+        case "5":
+            sendCommand(12)
+        case "6":
+            sendCommand(13)
+        case "7":
+            sendCommand(14)
+        case "8":
+            sendCommand(15)
+        case "9":
+            sendCommand(16)
+        case "a":
+            sendCommand(29)
+        case "b":
+            sendCommand(30)
+        case "c":
+            sendCommand(31)
+        case "d":
+            sendCommand(32)
+        case "e":
+            sendCommand(33)
+        case "f":
+            sendCommand(34)
+        case "g":
+            sendCommand(35)
+        case "h":
+            sendCommand(36)
+        case "i":
+            sendCommand(37)
+        case "j":
+            sendCommand(38)
+        case "k":
+            sendCommand(39)
+        case "l":
+            sendCommand(40)
+        case "m":
+            sendCommand(41)
+        case "n":
+            sendCommand(42)
+        case "o":
+            sendCommand(43)
+        case "p":
+            sendCommand(44)
+        case "q":
+            sendCommand(45)
+        case "r":
+            sendCommand(46)
+        case "s":
+            sendCommand(47)
+        case "t":
+            sendCommand(48)
+        case "u":
+            sendCommand(49)
+        case "v":
+            sendCommand(50)
+        case "w":
+            sendCommand(51)
+        case "x":
+            sendCommand(52)
+        case "y":
+            sendCommand(53)
+        case "z":
+            sendCommand(54)
+        case " ":
+            sendCommand(62)
+        case "-":
+            sendCommand(69)
+        case "_":
+            sendCommand(0)
+        case "+":
+            sendCommand(81)
+        case "=":
+            sendCommand(70)
+        case "{":
+            sendCommand(0)
+        case "}":
+            sendCommand(0)
+        case "[":
+            sendCommand(71)
+        case "]":
+            sendCommand(72)
+        case "|":
+            sendCommand(0)
+        case "\\":
+            sendCommand(73)
+        case ":":
+            sendCommand(0)
+        case ";":
+            sendCommand(74)
+        case "\"":
+            sendCommand(0)
+        case "'":
+            sendCommand(75)
+        case "<":
+            sendCommand(0)
+        case ">":
+            sendCommand(0)
+        case ",":
+            sendCommand(55)
+        case ".":
+            sendCommand(56)
+        case "?":
+            sendCommand(0)
+        case "/":
+            sendCommand(76)
+        case "~":
+            sendCommand(0)
+        case "!":
+            sendCommand(0)
+        case "@":
+            sendCommand(77)
+        case "#":
+            sendCommand(0)
+        case "$":
+            sendCommand(0)
+        case "%":
+            sendCommand(0)
+        case "^":
+            sendCommand(0)
+        case "&":
+            sendCommand(0)
+        case "*":
+            sendCommand(0)
+        case "(":
+            sendCommand(0)
+        case ")":
+            sendCommand(0)
+        case "":
+            sendCommand(67)
+        case "\n":
+            sendCommand(66)
+
+        case "caps":
+            sendCommand(115)
+        default:
+            print(string)
+        }
         return true
     }
+    
+    
 }
 
 
@@ -200,8 +361,7 @@ extension ViewController{
                 .responseData { (response) in
                     switch response.result {
                     case .success:
-                        let result = JSON(data: response.data!)
-                        print(result)
+                        print(response.data!)
                     case .failure(let error):
                         print(error)
                     }
