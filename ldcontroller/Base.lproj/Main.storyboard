@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--LDController-->
+        <!--B·KeyMo AIR-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ldcontroller" customModuleProvider="target" sceneMemberID="viewController">
@@ -127,7 +127,7 @@
                                 </constraints>
                                 <state key="normal" image="keyboard_30"/>
                                 <connections>
-                                    <action selector="clickKeyboard" destination="BYZ-38-t0r" eventType="touchUpInside" id="SYE-8T-J7F"/>
+                                    <action selector="clickButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CNF-ea-Uh7"/>
                                 </connections>
                             </button>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EHj-Wz-hYQ">
@@ -161,6 +161,28 @@
                                     <action selector="clickButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EzR-qu-vDw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wk0-ou-Ih9">
+                                <rect key="frame" x="305" y="64" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="E76-cp-pse"/>
+                                    <constraint firstAttribute="width" constant="70" id="Mmp-F0-zLf"/>
+                                </constraints>
+                                <state key="normal" image="btv"/>
+                                <connections>
+                                    <action selector="clickButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tdq-AV-dNM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G53-C8-tnV">
+                                <rect key="frame" x="157" y="464" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="MSd-OZ-pXL"/>
+                                    <constraint firstAttribute="width" constant="60" id="jUb-UM-8kz"/>
+                                </constraints>
+                                <state key="normal" image="volume_mute_30"/>
+                                <connections>
+                                    <action selector="clickButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Cr-qV-O6U"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
@@ -168,6 +190,7 @@
                             <constraint firstItem="ghN-xT-wwy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="E0i-iZ-6mF"/>
                             <constraint firstItem="gcZ-PW-ddz" firstAttribute="top" secondItem="UM6-Us-v1Y" secondAttribute="bottom" constant="95" id="FYW-hD-MQk"/>
                             <constraint firstItem="rch-Eh-3Zc" firstAttribute="top" secondItem="gcZ-PW-ddz" secondAttribute="bottom" constant="10" id="IYE-gh-J74"/>
+                            <constraint firstItem="G53-C8-tnV" firstAttribute="top" secondItem="ghN-xT-wwy" secondAttribute="bottom" constant="10" id="JV8-Ce-UfR"/>
                             <constraint firstItem="1x6-JH-AvN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="155" id="KCI-kj-baJ"/>
                             <constraint firstItem="gww-Mw-UoC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LbE-aU-Znc"/>
                             <constraint firstItem="UM6-Us-v1Y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="155" id="M3A-Dh-qeF"/>
@@ -181,12 +204,15 @@
                             <constraint firstItem="EHj-Wz-hYQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Yae-vg-Snn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gcZ-PW-ddz" secondAttribute="trailing" constant="57" id="ZI4-39-XmJ"/>
                             <constraint firstItem="0XL-Ck-oM6" firstAttribute="leading" secondItem="1x6-JH-AvN" secondAttribute="trailing" constant="5" id="Zhm-RV-Hkx"/>
+                            <constraint firstItem="wk0-ou-Ih9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="do1-Fe-7yz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9Vf-xW-7zM" secondAttribute="bottom" constant="16" id="hSR-vn-MvF"/>
                             <constraint firstItem="0XL-Ck-oM6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iWn-hO-sFM"/>
                             <constraint firstItem="XCQ-Pv-RSE" firstAttribute="top" secondItem="1x6-JH-AvN" secondAttribute="bottom" constant="95" id="mAR-Uu-gzE"/>
+                            <constraint firstItem="wk0-ou-Ih9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mMJ-Jr-5ws"/>
                             <constraint firstItem="fCe-MU-amt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="pnv-Cu-me7"/>
                             <constraint firstItem="0XL-Ck-oM6" firstAttribute="top" secondItem="wkl-UX-Nag" secondAttribute="bottom" constant="5" id="sQr-gC-Md8"/>
                             <constraint firstItem="exT-lS-2MA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="58" id="sbZ-L8-EtQ"/>
+                            <constraint firstItem="G53-C8-tnV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tKp-Aw-Uow"/>
                             <constraint firstAttribute="trailing" secondItem="EHj-Wz-hYQ" secondAttribute="trailing" id="vsv-FL-lfB"/>
                             <constraint firstItem="fCe-MU-amt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="z0V-0h-UX6"/>
                             <constraint firstItem="UM6-Us-v1Y" firstAttribute="leading" secondItem="0XL-Ck-oM6" secondAttribute="trailing" constant="5" id="zib-rJ-OIq"/>
@@ -194,24 +220,25 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="LDController" id="MH9-Zz-Nqi">
+                    <navigationItem key="navigationItem" title="B·KeyMo AIR" id="MH9-Zz-Nqi">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="TyD-yA-aXf">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sr2-aQ-n6k">
                                 <rect key="frame" x="329" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="edit_30"/>
                                 <connections>
-                                    <action selector="setIP" destination="BYZ-38-t0r" eventType="touchUpInside" id="GDH-UN-7uW"/>
+                                    <action selector="showPopupMenu" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Dl-rP-Kvc"/>
                                 </connections>
                             </button>
                             <connections>
-                                <action selector="setIP" destination="BYZ-38-t0r" id="m7z-ji-voF"/>
+                                <action selector="showPopupMenu" destination="BYZ-38-t0r" id="Ckj-Dq-1YT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="btApps" destination="gcZ-PW-ddz" id="78g-bT-7BB"/>
                         <outlet property="btBack" destination="ghN-xT-wwy" id="xlw-6A-rTY"/>
+                        <outlet property="btBtv" destination="wk0-ou-Ih9" id="Iih-DE-L4G"/>
                         <outlet property="btDown" destination="gww-Mw-UoC" id="qjE-CH-pCN"/>
                         <outlet property="btEdit" destination="sr2-aQ-n6k" id="cAq-r6-qLV"/>
                         <outlet property="btHome" destination="XCQ-Pv-RSE" id="vVl-wg-njH"/>
@@ -222,6 +249,7 @@
                         <outlet property="btRight" destination="UM6-Us-v1Y" id="OzQ-kY-3TD"/>
                         <outlet property="btUp" destination="wkl-UX-Nag" id="uC2-Kx-u3k"/>
                         <outlet property="btVolDown" destination="exT-lS-2MA" id="Wh3-Z2-SIl"/>
+                        <outlet property="btVolMute" destination="G53-C8-tnV" id="etV-ZL-ma7"/>
                         <outlet property="btVolUp" destination="rch-Eh-3Zc" id="C49-Te-fv8"/>
                         <outlet property="tfHolder" destination="EHj-Wz-hYQ" id="m8s-cV-x5b"/>
                     </connections>
@@ -256,6 +284,7 @@
     <resources>
         <image name="apps_30" width="30" height="30"/>
         <image name="back_30" width="30" height="30"/>
+        <image name="btv" width="40" height="40"/>
         <image name="down_30" width="30" height="30"/>
         <image name="edit_30" width="30" height="30"/>
         <image name="home_30" width="30" height="30"/>
@@ -266,6 +295,7 @@
         <image name="up_30" width="30" height="30"/>
         <image name="volume-decrease_30" width="30" height="30"/>
         <image name="volume-increase_30" width="30" height="30"/>
+        <image name="volume_mute_30" width="30" height="30"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

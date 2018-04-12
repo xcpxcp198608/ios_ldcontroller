@@ -11,11 +11,18 @@ import Alamofire
 import SwiftyJSON
 import Instructions
 import AudioToolbox
+import Popover_OC
+import MMPopupView
+import CoreData
+import CoreStore
+import PKHUD
+
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var btEdit: UIButton!
     @IBOutlet weak var btPower: UIButton!
+    @IBOutlet weak var btBtv: UIButton!
     @IBOutlet weak var btUp: UIButton!
     @IBOutlet weak var btDown: UIButton!
     @IBOutlet weak var btLeft: UIButton!
@@ -26,17 +33,36 @@ class ViewController: UIViewController {
     @IBOutlet weak var btApps: UIButton!
     @IBOutlet weak var btVolUp: UIButton!
     @IBOutlet weak var btVolDown: UIButton!
+    @IBOutlet weak var btVolMute: UIButton!
     @IBOutlet weak var btKeyboard: UIButton!
     @IBOutlet weak var tfHolder: UITextField!
     
     let coachMarksController = CoachMarksController()
     
+    
+    var localIp = ""
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .lightContent
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        localIp = getLocalIPAddressForCurrentWiFi()!
+        do {
+            try CoreStore.addStorageAndWait(SQLiteStore.init(fileName: "ldcontroller.sqlite"))
+        }
+        catch { // ...
+        }
+        let config = MMAlertViewConfig.global()
+        config?.defaultTextOK = "Confirm"
+        config?.defaultTextConfirm = "Confirm"
+        config?.defaultTextCancel = "Cancel"
+        
+        let sConfig = MMSheetViewConfig.global()
+        sConfig?.defaultTextCancel = "Cancel"
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         gestureRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(gestureRecognizer)
@@ -44,11 +70,11 @@ class ViewController: UIViewController {
         coachMarksController.dataSource = self
         coachMarksController.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(capsChange), name: NSNotification.Name.UITextInputCurrentInputModeDidChange, object: nil)
     }
     
-    @objc func capsChange(){
-        print("caps")
+    
+    @objc func hideKeyboard(){
+        tfHolder.resignFirstResponder()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,79 +88,179 @@ class ViewController: UIViewController {
         self.coachMarksController.stop(immediately: true)
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+    
+    @IBAction func showPopupMenu(){
+        let popAdd = PopoverAction.init(image: #imageLiteral(resourceName: "add_30"), title: "Add new", handler: {action in
+            self.setIP()
+        })
+        let popList = PopoverAction.init(image: #imageLiteral(resourceName: "menu_30"), title: "Show all", handler: {action in
+            self.showLocalIps()
+        })
+        let popDelete = PopoverAction.init(image: #imageLiteral(resourceName: "ic_delete_forever_30"), title: "Delete all", handler: {action in
+            self.deleteLocalIps()
+        })
+        let popView = PopoverView()
+        popView.style = .dark
+        popView.show(to: btEdit, with: [popAdd!, popList!, popDelete!])
     }
     
-    @IBAction func setIP(){
-        let localIp = getLocalIPAddressForCurrentWiFi()
-        let alertView = UIAlertController.init(title: "Setting", message: "", preferredStyle: .alert)
-        let confirmAction = UIAlertAction.init(title: "Confirm", style: .default, handler: {action in
-            for textField in alertView.textFields!{
-                if let ip = textField.text{
-                    print(ip)
-                    UserDefaults.standard.set(ip, forKey: "IPAddress")
+    func setIP(){
+        let alertView = MMAlertView.init(inputTitle: "Add New", detail: "Enter IP address shown on your BTVi B-KeyMo Air app", placeholder: localIp) { (newIp) in
+            if let ip = newIp{
+                if ip.count <= 0{
+                    return
                 }
+                let regexIP = "^(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[1-9])\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)$"
+                let predicate = NSPredicate(format: "SELF MATCHES %@", regexIP)
+                if !predicate.evaluate(with: ip) {
+                    HUD.flash(.labeledError(title: "", subtitle: "IP address format error"), delay: 2.5)
+                    return
+                }
+                UserDefaults.standard.set(ip, forKey: "IPAddress")
+                CoreStore.perform(
+                    asynchronous: { (transaction) -> Void in
+                        let ipInfo = transaction.create(Into<IP>())
+                        ipInfo.ip = ip
+                },
+                    completion: { (result) -> Void in
+                        switch result {
+                        case .success: print("success!")
+                        case .failure(let error): print(error)
+                        }
+                })
             }
-        })
-        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: {action in
+        }
+        alertView?.show()
+    }
+    
+    
+    
+    func showLocalIps(){
+        let ips = CoreStore.fetchAll(From<IP>())
+        if(ips == nil || (ips?.count)! <= 0){
+            HUD.flash(.labeledError(title: "", subtitle: "Please enter targeted BTVi IP"), delay: 1.5)
+            return
+        }
+        var alertItems = [MMPopupItem]()
+        for ip in ips!{
+            print(ip.ip)
+            let alertItem = MMItemMake(ip.ip, .normal) { (position) in
+                UserDefaults.standard.set(ip.ip, forKey: "IPAddress")
+            }
+            alertItems.append(alertItem!)
+        }
+        
+        let alertSheetView = MMSheetView .init(title: "Choose paired BTVi device", items: alertItems)
+        alertSheetView?.backgroundColor = UIColor.darkGray
+        alertSheetView?.show()
+    }
+    
+    
+    func deleteLocalIps(){
+        let confirmItem = MMItemMake("Confirm", .highlight) { (position) in
             
+        }
+        let cancelItem = MMItemMake("Cancel", .normal) { (position) in
+            
+        }
+        let alertView = MMAlertView.init(title: "Delete", detail: "Please confirm to remove all BTVi pairings", items: [confirmItem!, cancelItem!])
+        
+        alertView?.show({ (view, isShow) in
+            CoreStore.perform(
+                asynchronous: { (transaction) -> Void in
+                    transaction.deleteAll(From<IP>())
+                },
+                completion: { _ in }
+            )
+            UserDefaults.standard.removeObject(forKey: "IPAddress")
         })
-        alertView.addTextField(configurationHandler: {textField in
-            textField.keyboardType = .numbersAndPunctuation
-            textField.keyboardAppearance = .alert
-            textField.placeholder = "type in ip"
-            if let ip = UserDefaults.standard.string(forKey: "IPAddress"){
-                textField.text = ip
-            }else{
-                if localIp != nil {
-                    textField.text = localIp
-                }
-            }
-        })
-        alertView.addAction(confirmAction)
-        alertView.addAction(cancelAction)
-        self.present(alertView, animated: true, completion: nil)
     }
     
     @IBAction func clickButton(button: UIButton){
-        AudioServicesPlaySystemSound(1105)
+        let currentIp = UserDefaults.standard.string(forKey: "IPAddress")
+        if currentIp == nil || (currentIp?.count)! <= 0{
+            HUD.flash(.labeledError(title: "", subtitle: "Please enter targeted BTVi IP"), delay: 1.5)
+            return
+        }
         switch button {
         case btPower:
             sendCommand(26)
+            break
+        case btBtv:
+            sendCommand(260)
+            break
         case btUp:
             sendCommand(19)
+            break
         case btDown:
             sendCommand(20)
+            break
         case btLeft:
             sendCommand(21)
+            break
         case btRight:
             sendCommand(22)
+            break
         case btOK:
             sendCommand(23)
+            break
         case btVolUp:
             sendCommand(24)
+            break
         case btVolDown:
             sendCommand(25)
+            break
+        case btVolMute:
+            sendCommand(164)
+            break
         case btHome:
             sendCommand(3)
+            break
         case btBack:
             sendCommand(4)
+            break
         case btApps:
             sendCommand(262)
+            break
+        case btKeyboard:
+            tfHolder.becomeFirstResponder()
+            break
         default:
             print("default")
+            break
         }
-    }
-    
-    @IBAction func clickKeyboard(){
-        tfHolder.becomeFirstResponder()
-    }
-    
-    @objc func hideKeyboard(){
-        tfHolder.resignFirstResponder()
+        AudioServicesPlaySystemSound(1105)
     }
 
+}
+
+
+
+extension ViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate{
+    
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 1
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        return coachMarksController.helper.makeCoachMark(for: btEdit, pointOfInterest: nil, cutoutPathMaker: nil)
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+        coachViews.bodyView.hintLabel.text = "Click edit button to pair with your BTVi"
+        coachViews.bodyView.nextLabel.text = "Got it"
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool) {
+        UserDefaults.standard.set(true, forKey: "ShowGuideView")
+    }
+    
+}
+
+
+extension ViewController {
     
     func getLocalIPAddressForCurrentWiFi() -> String? {
         var address: String?
@@ -166,36 +292,9 @@ class ViewController: UIViewController {
 }
 
 
-
-extension ViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate{
-    
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
-        return 1
-    }
-    
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
-        return coachMarksController.helper.makeCoachMark(for: btEdit, pointOfInterest: nil, cutoutPathMaker: nil)
-    }
-    
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
-        coachViews.bodyView.hintLabel.text = "Click to set IP address"
-        coachViews.bodyView.nextLabel.text = "Got it"
-        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
-    }
-    
-    func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool) {
-        UserDefaults.standard.set(true, forKey: "ShowGuideView")
-    }
-    
-}
-
-
-
 extension ViewController: UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         switch string {
         case "0":
             sendCommand(7)
@@ -337,7 +436,6 @@ extension ViewController: UITextFieldDelegate{
             sendCommand(67)
         case "\n":
             sendCommand(66)
-
         case "caps":
             sendCommand(115)
         default:

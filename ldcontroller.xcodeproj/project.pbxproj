@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CD43EA322078ADC000D28AE2 /* BasicNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43EA312078ADC000D28AE2 /* BasicNavigationViewController.swift */; };
+		CD8BA1A4207DE70300577E5A /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BA1A3207DE70300577E5A /* Functions.swift */; };
+		CD8BA1AA207DFA1C00577E5A /* IP+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BA1A9207DFA1C00577E5A /* IP+CoreDataClass.swift */; };
+		CD8BA1AC207DFA1F00577E5A /* IP+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BA1AB207DFA1F00577E5A /* IP+CoreDataProperties.swift */; };
 		CDFF3104207861AE0094D5B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF3103207861AE0094D5B3 /* AppDelegate.swift */; };
 		CDFF3106207861AE0094D5B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF3105207861AE0094D5B3 /* ViewController.swift */; };
 		CDFF3109207861AE0094D5B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDFF3107207861AE0094D5B3 /* Main.storyboard */; };
@@ -40,6 +43,9 @@
 		4A8BD481EFD85D709B33183C /* Pods-ldcontroller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ldcontroller.release.xcconfig"; path = "Pods/Target Support Files/Pods-ldcontroller/Pods-ldcontroller.release.xcconfig"; sourceTree = "<group>"; };
 		CD43EA312078ADC000D28AE2 /* BasicNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicNavigationViewController.swift; sourceTree = "<group>"; };
 		CD43EA342078C75700D28AE2 /* ldcontroller-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ldcontroller-Bridging-Header.h"; sourceTree = "<group>"; };
+		CD8BA1A3207DE70300577E5A /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		CD8BA1A9207DFA1C00577E5A /* IP+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "IP+CoreDataClass.swift"; path = "/Users/xuchengpeng/IOSProject/ldcontroller/ldcontroller/IP+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		CD8BA1AB207DFA1F00577E5A /* IP+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "IP+CoreDataProperties.swift"; path = "/Users/xuchengpeng/IOSProject/ldcontroller/ldcontroller/IP+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		CDFF3100207861AE0094D5B3 /* ldcontroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ldcontroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDFF3103207861AE0094D5B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDFF3105207861AE0094D5B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +124,8 @@
 		CDFF3102207861AE0094D5B3 /* ldcontroller */ = {
 			isa = PBXGroup;
 			children = (
+				CD8BA1AB207DFA1F00577E5A /* IP+CoreDataProperties.swift */,
+				CD8BA1A9207DFA1C00577E5A /* IP+CoreDataClass.swift */,
 				CDFF3103207861AE0094D5B3 /* AppDelegate.swift */,
 				CDFF3105207861AE0094D5B3 /* ViewController.swift */,
 				CDFF3107207861AE0094D5B3 /* Main.storyboard */,
@@ -127,6 +135,7 @@
 				CDFF310A207861AE0094D5B3 /* ldcontroller.xcdatamodeld */,
 				CD43EA312078ADC000D28AE2 /* BasicNavigationViewController.swift */,
 				CD43EA342078C75700D28AE2 /* ldcontroller-Bridging-Header.h */,
+				CD8BA1A3207DE70300577E5A /* Functions.swift */,
 			);
 			path = ldcontroller;
 			sourceTree = "<group>";
@@ -295,18 +304,26 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ldcontroller/Pods-ldcontroller-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Gecco/Gecco.framework",
+				"${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework",
 				"${BUILT_PRODUCTS_DIR}/Instructions/Instructions.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MMPopupView/MMPopupView.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Popover.OC/Popover_OC.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gecco.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instructions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMPopupView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Popover_OC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -341,8 +358,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDFF3106207861AE0094D5B3 /* ViewController.swift in Sources */,
+				CD8BA1AC207DFA1F00577E5A /* IP+CoreDataProperties.swift in Sources */,
 				CDFF3104207861AE0094D5B3 /* AppDelegate.swift in Sources */,
 				CDFF310C207861AE0094D5B3 /* ldcontroller.xcdatamodeld in Sources */,
+				CD8BA1AA207DFA1C00577E5A /* IP+CoreDataClass.swift in Sources */,
+				CD8BA1A4207DE70300577E5A /* Functions.swift in Sources */,
 				CD43EA322078ADC000D28AE2 /* BasicNavigationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,15 +540,18 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X7K4VHH856;
+				DEVELOPMENT_TEAM = TC525ZTYGQ;
 				INFOPLIST_FILE = ldcontroller/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontroller;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.bkeymo.air;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ldcontroller/ldcontroller-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -540,14 +563,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X7K4VHH856;
+				DEVELOPMENT_TEAM = TC525ZTYGQ;
 				INFOPLIST_FILE = ldcontroller/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontroller;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.bkeymo.air;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ldcontroller/ldcontroller-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -559,7 +585,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7K4VHH856;
 				INFOPLIST_FILE = ldcontrollerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontrollerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -576,7 +606,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7K4VHH856;
 				INFOPLIST_FILE = ldcontrollerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontrollerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -592,7 +626,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7K4VHH856;
 				INFOPLIST_FILE = ldcontrollerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontrollerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -608,7 +646,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7K4VHH856;
 				INFOPLIST_FILE = ldcontrollerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.legacy.ldcontrollerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
