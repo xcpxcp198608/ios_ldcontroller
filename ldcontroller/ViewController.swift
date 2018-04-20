@@ -16,12 +16,14 @@ import MMPopupView
 import CoreData
 import CoreStore
 import PKHUD
+import Reachability
 
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var btEdit: UIButton!
     @IBOutlet weak var btPower: UIButton!
+    @IBOutlet weak var laAlias: UILabel!
     @IBOutlet weak var btBtv: UIButton!
     @IBOutlet weak var btUp: UIButton!
     @IBOutlet weak var btDown: UIButton!
@@ -38,7 +40,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tfHolder: UITextField!
     
     let coachMarksController = CoachMarksController()
-    
+    let reachability = Reachability()!
     
     var localIp = ""
     
@@ -50,7 +52,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        localIp = getLocalIPAddressForCurrentWiFi()!
+//        checkNetwork()
+        self.localIp = self.getLocalIPAddressForCurrentWiFi()
         do {
             try CoreStore.addStorageAndWait(SQLiteStore.init(fileName: "ldcontroller.sqlite"))
         }
@@ -63,6 +66,7 @@ class ViewController: UIViewController {
         
         let sConfig = MMSheetViewConfig.global()
         sConfig?.defaultTextCancel = "Cancel"
+        
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         gestureRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(gestureRecognizer)
@@ -70,6 +74,41 @@ class ViewController: UIViewController {
         coachMarksController.dataSource = self
         coachMarksController.delegate = self
         
+        if let currentIp = UserDefaults.standard.string(forKey: "IPAddress"){
+            var oIp: IP?
+            CoreStore.perform(
+                asynchronous: { (transaction) -> Void in
+                    oIp = transaction.fetchOne(
+                        From<IP>()
+                            .where(\.ip == currentIp)
+                    )
+                },
+                completion: { (result) -> Void in
+                    switch result {
+                    case .success: self.laAlias.text = oIp?.name
+                    case .failure(let error): print(error)
+                    }
+                })
+        }
+    }
+    
+    func checkNetwork(){
+        reachability.whenReachable = { reachability in
+            if reachability.connection == .wifi {
+                self.localIp = self.getLocalIPAddressForCurrentWiFi()
+            } else {
+                print("Reachable via Cellular")
+            }
+        }
+        reachability.whenUnreachable = { _ in
+            print("Not reachable")
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
     }
     
     
@@ -86,6 +125,7 @@ class ViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         self.coachMarksController.stop(immediately: true)
+        reachability.stopNotifier()
     }
     
     
@@ -116,19 +156,32 @@ class ViewController: UIViewController {
                     HUD.flash(.labeledError(title: "", subtitle: "IP address format error"), delay: 2.5)
                     return
                 }
-                UserDefaults.standard.set(ip, forKey: "IPAddress")
-                CoreStore.perform(
-                    asynchronous: { (transaction) -> Void in
-                        let ipInfo = transaction.create(Into<IP>())
-                        ipInfo.ip = ip
-                },
-                    completion: { (result) -> Void in
-                        switch result {
-                        case .success: print("success!")
-                        case .failure(let error): print(error)
-                        }
-                })
+                self.setIPAlias(ip)
             }
+        }
+        alertView?.show()
+    }
+    
+    func setIPAlias(_ ip: String){
+        let alertView = MMAlertView.init(inputTitle: "Set alias", detail: "", placeholder: "type in alias") { (alias) in
+            var name = ""
+            if (alias?.count)! > 0{
+                name = alias!
+            }
+            UserDefaults.standard.set(ip, forKey: "IPAddress")
+            CoreStore.perform(
+                asynchronous: { (transaction) -> Void in
+                    let ipInfo = transaction.create(Into<IP>())
+                    ipInfo.ip = ip
+                    ipInfo.name = name
+                },
+                completion: { (result) -> Void in
+                    switch result {
+                    case .success: print("success!")
+                    case .failure(let error): print(error)
+                    }
+            })
+            self.laAlias.text = name
         }
         alertView?.show()
     }
@@ -144,8 +197,8 @@ class ViewController: UIViewController {
         var alertItems = [MMPopupItem]()
         for ip in ips!{
             print(ip.ip)
-            let alertItem = MMItemMake(ip.ip, .normal) { (position) in
-                UserDefaults.standard.set(ip.ip, forKey: "IPAddress")
+            let alertItem = MMItemMake("\(ip.ip)(\(ip.name))", .normal) { (position) in
+                self.showIPAction(ip.ip, ip.name)
             }
             alertItems.append(alertItem!)
         }
@@ -155,25 +208,65 @@ class ViewController: UIViewController {
         alertSheetView?.show()
     }
     
+    func showIPAction(_ ip: String, _ name: String){
+        let alertItemControl = MMItemMake("Control", .highlight) { (position) in
+            UserDefaults.standard.set(ip, forKey: "IPAddress")
+            self.laAlias.text = name
+        }
+        
+        let alertItemDelete = MMItemMake("Delete", .normal) { (position) in
+            CoreStore.perform(
+                asynchronous: { (transaction) -> Void in
+                    let oIp = transaction.fetchOne(
+                        From<IP>()
+                            .where(\.ip == ip)
+                    )
+                    transaction.delete(oIp)
+                },
+                completion: { (result) -> Void in
+                    switch result {
+                    case .success:
+                        if let currentIp = UserDefaults.standard.string(forKey: "IPAddress"){
+                            if currentIp == ip{
+                                UserDefaults.standard.removeObject(forKey: "IPAddress")
+                                self.laAlias.text = ""
+                            }
+                        }
+                        break
+                    case .failure(let error): print(error)
+                    }
+            })
+        }
+        
+        let alertItemCancel = MMItemMake("Cancel", .normal) { (position) in
+        }
+        let alertView = MMAlertView.init(title: "Choose Action", detail: "", items: [alertItemControl!, alertItemDelete!, alertItemCancel!])
+        alertView?.show()
+    }
+    
     
     func deleteLocalIps(){
         let confirmItem = MMItemMake("Confirm", .highlight) { (position) in
-            
+            CoreStore.perform(
+                asynchronous: { (transaction) -> Void in
+                    transaction.deleteAll(From<IP>())
+                },
+                completion: { (result) -> Void in
+                    switch result {
+                    case .success:
+                        UserDefaults.standard.removeObject(forKey: "IPAddress")
+                        self.laAlias.text = ""
+                        break
+                    case .failure(let error): print(error)
+                    }
+                })
         }
         let cancelItem = MMItemMake("Cancel", .normal) { (position) in
             
         }
         let alertView = MMAlertView.init(title: "Delete", detail: "Please confirm to remove all BTVi pairings", items: [confirmItem!, cancelItem!])
         
-        alertView?.show({ (view, isShow) in
-            CoreStore.perform(
-                asynchronous: { (transaction) -> Void in
-                    transaction.deleteAll(From<IP>())
-                },
-                completion: { _ in }
-            )
-            UserDefaults.standard.removeObject(forKey: "IPAddress")
-        })
+        alertView?.show()
     }
     
     @IBAction func clickButton(button: UIButton){
@@ -262,14 +355,15 @@ extension ViewController: CoachMarksControllerDataSource, CoachMarksControllerDe
 
 extension ViewController {
     
-    func getLocalIPAddressForCurrentWiFi() -> String? {
-        var address: String?
+    
+    func getLocalIPAddressForCurrentWiFi() -> String {
+        var address = ""
         var ifaddr: UnsafeMutablePointer<ifaddrs>? = nil
         guard getifaddrs(&ifaddr) == 0 else {
-            return nil
+            return address
         }
         guard let firstAddr = ifaddr else {
-            return nil
+            return address
         }
         for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
             let interface = ifptr.pointee

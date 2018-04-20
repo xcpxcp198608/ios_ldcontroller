@@ -11,4 +11,5 @@ target 'ldcontroller' do
     pod 'MMPopupView', '~>1.7.2'
     pod 'CoreStore', '~> 5.0'
     pod 'PKHUD', '~> 5.0'
+    pod 'ReachabilitySwift'
 end

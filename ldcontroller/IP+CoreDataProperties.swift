@@ -17,5 +17,6 @@ extension IP {
     }
 
     @NSManaged public var ip: String
+    @NSManaged public var name: String
 
 }

@@ -183,13 +183,24 @@
                                     <action selector="clickButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Cr-qV-O6U"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SvN-b7-WOf">
+                                <rect key="frame" x="84" y="80" width="213" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="28D-aE-S4J"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rch-Eh-3Zc" secondAttribute="trailing" constant="57" id="6C6-Z1-PVt"/>
                             <constraint firstItem="ghN-xT-wwy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="E0i-iZ-6mF"/>
+                            <constraint firstItem="SvN-b7-WOf" firstAttribute="leading" secondItem="fCe-MU-amt" secondAttribute="trailing" constant="28" id="Ehb-eG-uB1"/>
                             <constraint firstItem="gcZ-PW-ddz" firstAttribute="top" secondItem="UM6-Us-v1Y" secondAttribute="bottom" constant="95" id="FYW-hD-MQk"/>
                             <constraint firstItem="rch-Eh-3Zc" firstAttribute="top" secondItem="gcZ-PW-ddz" secondAttribute="bottom" constant="10" id="IYE-gh-J74"/>
+                            <constraint firstItem="SvN-b7-WOf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="Ia7-yC-qQp"/>
                             <constraint firstItem="G53-C8-tnV" firstAttribute="top" secondItem="ghN-xT-wwy" secondAttribute="bottom" constant="10" id="JV8-Ce-UfR"/>
                             <constraint firstItem="1x6-JH-AvN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="155" id="KCI-kj-baJ"/>
                             <constraint firstItem="gww-Mw-UoC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LbE-aU-Znc"/>
@@ -207,6 +218,7 @@
                             <constraint firstItem="wk0-ou-Ih9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="do1-Fe-7yz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9Vf-xW-7zM" secondAttribute="bottom" constant="16" id="hSR-vn-MvF"/>
                             <constraint firstItem="0XL-Ck-oM6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iWn-hO-sFM"/>
+                            <constraint firstItem="wk0-ou-Ih9" firstAttribute="leading" secondItem="SvN-b7-WOf" secondAttribute="trailing" constant="8" id="je5-uA-D9k"/>
                             <constraint firstItem="XCQ-Pv-RSE" firstAttribute="top" secondItem="1x6-JH-AvN" secondAttribute="bottom" constant="95" id="mAR-Uu-gzE"/>
                             <constraint firstItem="wk0-ou-Ih9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mMJ-Jr-5ws"/>
                             <constraint firstItem="fCe-MU-amt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="pnv-Cu-me7"/>
@@ -251,6 +263,7 @@
                         <outlet property="btVolDown" destination="exT-lS-2MA" id="Wh3-Z2-SIl"/>
                         <outlet property="btVolMute" destination="G53-C8-tnV" id="etV-ZL-ma7"/>
                         <outlet property="btVolUp" destination="rch-Eh-3Zc" id="C49-Te-fv8"/>
+                        <outlet property="laAlias" destination="SvN-b7-WOf" id="Nio-oW-CkL"/>
                         <outlet property="tfHolder" destination="EHj-Wz-hYQ" id="m8s-cV-x5b"/>
                     </connections>
                 </viewController>

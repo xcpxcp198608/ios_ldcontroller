@@ -6,8 +6,9 @@
                 <entry key="sync.isPrimaryKey" value="true"/>
             </userInfo>
         </attribute>
+        <attribute name="name" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="IP" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="IP" positionX="-63" positionY="-18" width="128" height="75"/>
     </elements>
 </model>
